@@ -30,7 +30,7 @@ public class SimpleList
 	/**
 	 * Adds an element to the front of the list, shifting
 	 * all other elements over to make room. If the list is full,
-	 * last element "falls off" the list.
+	 * the size of the list is increased by 50%.
 	 * 
 	 * @param newInt element to be added to list
 	 */
@@ -38,10 +38,19 @@ public class SimpleList
 	{
 		int temp;
 		
-		if (count == 10)
-			temp = 9;
-		else
-			temp = count;
+		// Increases size of list if full
+		if (count == list.length)
+		{
+			int[] tempList = list;
+			
+			list = new int[list.length + list.length / 2];
+			
+			for(int loc = 0; loc < count; loc++)
+				list[loc] = tempList[loc];
+		}
+		
+			
+		temp = count;
 		// Shifts over elements to make room
 		while (temp > 0)
 		{
@@ -56,7 +65,8 @@ public class SimpleList
 	}
 	/**
 	 * Removes target element from list. Following elements
-	 * will be shifted down.
+	 * will be shifted down. If the list has more than 25%
+	 * empty spaces, the size of the list is decreased by 25%.
 	 * 
 	 * @param target element to be removed from list
 	 */
@@ -71,6 +81,17 @@ public class SimpleList
 				list[i] = list[i + 1];
 			}
 			count--;
+		}
+		
+		// Decreases list size if 25% empty
+		if(count <= .75 * list.length)
+		{
+			int[] tempList = list;
+			
+			list = new int[(int)(list.length - .25 * list.length)];
+			
+			for(int loc = 0; loc < count; loc++)
+				list[loc] = tempList[loc];
 		}
 	}
 	
