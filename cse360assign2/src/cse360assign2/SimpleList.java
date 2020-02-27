@@ -4,13 +4,14 @@ package cse360assign2;
  * 
  * @author Micah Secrest
  * Class ID: 391
- * Assignment 1
+ * Assignment 2
+ * 
+ * GitHub link: https://github.com/micahsecrest/CSE360Assignment2Repository
  * 
  * SimpleList is a list which contains up to 10 integers
  * and a count of the integers currently in the list.
- * This contains methods which add items, remove items,
- * return the count of items, search for an item, and
- * return the list as a <code>String</code>. 
+ * This contains methods which can be used to manipulate
+ * and view information about the list.
  *
  */
 public class SimpleList
@@ -139,6 +140,50 @@ public class SimpleList
 			}
 		}
 		return -1;
+	}
+	
+	/**
+	 * Appends a parameter to the end of the list. If the list is full,
+	 * increases the list size by 50%. 
+	 * 
+	 * @param newVal value to be appended to list.
+	 */
+	public void append(int newVal)
+	{
+		// Increases size of list if full
+		if (count == list.length)
+		{
+			int[] tempList = list;
+			
+			list = new int[list.length + list.length / 2];
+			
+			for(int loc = 0; loc < count; loc++)
+				list[loc] = tempList[loc];
+		}
+		
+		list[count] = newVal;
+		count++;
+		
+	}
+	
+	/**
+	 * Returns first element in list.
+	 * 
+	 * @return the first element in list.
+	 */
+	public int first()
+	{
+		return list[0];
+	}
+	
+	/**
+	 * Returns the current number of possible locations in the list.
+	 * 
+	 * @return number of possible locations in the list.
+	 */
+	public int size()
+	{
+		return list.length;
 	}
 	
 }
